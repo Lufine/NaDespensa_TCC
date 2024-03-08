@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="America/Sao_Paulo">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NaDespensa</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}" id="title">NaDespensa</a></h1>
+        <nav class="opcao_nav">
+            <ul id="opcao_ul">
+                <li><a href="{% url 'produtos' %}">Produtos</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="#" id="user-menu-toggle">Olá, {{ username }}</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+    <div id="user-menu">
+        <ul id="click-logout">
+            <li><a href="/auth/logout" id="btn-logout">Logout</a></li>
+        </ul>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var userMenuToggle = document.getElementById("user-menu-toggle");
+            var userMenu = document.getElementById("user-menu");
+    
+            userMenuToggle.addEventListener("click", function() {
+                if (userMenu.style.display === "none" || userMenu.style.display === "") {
+                    userMenu.style.display = "block";
+                } else {
+                    userMenu.style.display = "none";
+                }
+            });
+    
+            // Close the menu when clicking outside of it
+            document.addEventListener("click", function(event) {
+                if (!userMenu.contains(event.target) && event.target !== userMenuToggle) {
+                    userMenu.style.display = "none";
+                }
+            });
+        });
+        function logout() {
+            // Implement logout logic here
+            // For now, redirect to logout URL
+            window.location.href = "{% url 'logout' %}";
+        }
+    </script>
+    <section class="hero">
+        <h2>Bem-vindo ao NaDespensa!</h2>
+        <p id="texto_menu">Aqui você pode organizar seus alimentos, fazer listas de compras e muito mais.</p>
+        <a href="#" class="btn-center">Comece agora</a>
+    </section>
+    <footer id="rodape">
+        <p>&copy; 2024 NaDespensa. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

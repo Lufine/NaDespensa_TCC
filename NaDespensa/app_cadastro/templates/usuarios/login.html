@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="America/Sao_Paulo">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+</head>
+<body>
+    <header>
+        <h1 id="title"><a href="{% url 'home' %}" id="link_home">NaDespensa</a></h1>
+        <nav id="opcao_nav">
+            <ul id="opcao_ul">
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1 id="subtitle">Login</h1>
+
+    <form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <button type="submit">Login</button>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </form>
+
+    <footer id="rodape">
+        <p>&copy; 2024 NaDespensa. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
