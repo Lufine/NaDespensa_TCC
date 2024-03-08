@@ -13,14 +13,14 @@
         <h1><a href="{% url 'home' %}" id="title">NaDespensa</a></h1>
         <nav class="opcao_nav">
             <ul id="opcao_ul">
-                <li><a href="{% url 'produtos' %}">Produtos</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Contato</a></li>
+                <li><a href="{% url 'produtos' %}"><strong>Produtos</strong></a></li>
+                <li><a href="#"><strong>Sobre</strong></a></li>
+                <li><a href="#"><strong>Contato</strong></a></li>
                 {% if request.user.is_authenticated %}
-                <li><a href="#" id="user-menu-toggle">Olá, {{ username }}</a></li>
+                <li><a href="#" id="user-menu-toggle"><strong>Olá, {{ username }}</strong></a></li>
                 {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}"><strong>Login</strong></a></li>
+                    <li><a href="{% url 'register' %}"><strong>Register</strong></a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -41,7 +41,7 @@
                 if (userMenu.style.display === "none" || userMenu.style.display === "") {
                     userMenu.style.display = "block";
                 } else {
-                    userMenu.style.display = "none";
+                    userMenu.style.display = "block";
                 }
             });
     

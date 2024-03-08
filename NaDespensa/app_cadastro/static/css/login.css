@@ -13,20 +13,20 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     margin-right: 20px;
-    color: #333;
+    color: #7de5b0;
 }
 body{
     font-family: Arial, sans-serif; align-items: center; text-align: center; margin: auto; background-color: #f4f4f4
 }
 header{
-    background-color: #77aaff;
+    background-color: #ffffff;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 #title{
-    color: #fff;font-size: 36px;
+    color: #7de5b0;font-size: 36px;
 }
 #link_home{
     text-decoration: none; color: inherit;
@@ -43,7 +43,7 @@ header{
 #rodape{
     text-align: center;
     padding: 20px 0;
-    background-color: #77aaff;
+    background-color: #000000;
     color: #fff;
     position: fixed;
     bottom: 0;
