@@ -38,20 +38,21 @@
             var userMenu = document.getElementById("user-menu");
     
             userMenuToggle.addEventListener("click", function() {
-                if (userMenu.style.display === "none" || userMenu.style.display === "block") {
+                if (userMenu.style.display === "none" || userMenu.style.display === "") {
                     userMenu.style.display = "block";
                 } else {
-                    userMenu.style.display = "none";
+                    userMenu.style.display = "none"; // Alterado para "none" quando já está visível
                 }
             });
     
-            // Close the menu when clicking outside of it
+            {% comment %} // Close the menu when clicking outside of it
             document.addEventListener("click", function(event) {
                 if (!userMenu.contains(event.target) && event.target !== userMenuToggle) {
                     userMenu.style.display = "none";
                 }
-            });
+            }); {% endcomment %}
         });
+    
         function logout() {
             // Implement logout logic here
             // For now, redirect to logout URL

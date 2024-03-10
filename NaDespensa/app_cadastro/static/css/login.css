@@ -29,7 +29,9 @@ header{
     color: #7de5b0;font-size: 36px;
 }
 #link_home{
-    text-decoration: none; color: inherit;
+    text-decoration: none; 
+    color: inherit;
+    margin-left: 15%;
 }
 #opcao_nav{
     list-style-type: none;
