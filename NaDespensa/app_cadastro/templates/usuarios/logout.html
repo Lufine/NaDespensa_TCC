@@ -14,8 +14,8 @@
         <nav class="opcao_nav">
             <ul id="opcao_ul">
                 <li><a href="{% url 'produtos' %}"><strong>Produtos</strong></a></li>
-                <li><a href="#"><strong>Sobre</strong></a></li>
-                <li><a href="#"><strong>Contato</strong></a></li>
+                <li><a href="{% url 'sobre' %}"><strong>Sobre</strong></a></li>
+                <li><a href="{% url 'contato' %}"><strong>Contato</strong></a></li>
                 {% if request.user.is_authenticated %}
                 <li><a href="#" id="user-menu-toggle"><strong>Olá, {{ username }}</strong></a></li>
                 {% else %}

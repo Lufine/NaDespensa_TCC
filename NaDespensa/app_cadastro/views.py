@@ -1,8 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as login_, logout as logout_
 from django.contrib.auth.decorators import login_required
+from .models import Produto
+from .forms import ProdutoForm
 
 def home(request):
     username = None
@@ -30,7 +32,8 @@ def register(request):
         user.save()
         
         message = "Usuário cadastrado com sucesso"
-        return render(request, 'usuarios/register.html', {'message': message})
+        render(request, 'usuarios/register.html', {'message': message})
+        return redirect('login')
 
 
 def login(request):
@@ -54,11 +57,66 @@ def logout(request):
     return redirect('home')
 
 
+@login_required(login_url="/auth/login/")
 def produtos(request):
+    username = request.user.username
+    if request.method == "POST":
+        form = ProdutoForm(request.POST)
+        if form.is_valid():
+            produto = form.save(commit=False)
+            produto.usuario = request.user
+            produto.save()
+            return redirect('produtos')
+    else:
+        form = ProdutoForm()
+
+    produtos = Produto.objects.filter(usuario=request.user)
+    
+    # Excluir produtos com quantidade igual a 0
+    for produto in produtos:
+        if produto.quantidade == 0:
+            produto.delete()
+    return render(request, 'home/produtos.html', {'form': form, 'produtos': produtos, 'username': username},)
+
+@login_required
+def aumentar_quantidade(request, produto_id):
+    produto = get_object_or_404(Produto, id=produto_id, usuario=request.user)
+    if produto.quantidade > 0:
+        produto.quantidade += 1
+        produto.save()
+    return redirect('produtos')
+
+@login_required
+def diminuir_quantidade(request, produto_id):
+    produto = get_object_or_404(Produto, id=produto_id, usuario=request.user)
+    if produto.quantidade > 0:
+        produto.quantidade -= 1
+        produto.save()
+    return redirect('produtos')
+
+@login_required
+def excluir_produto(request, produto_id):
+    produto = get_object_or_404(Produto, pk=produto_id)
+    if request.method == 'POST':
+        produto.delete()
+        return redirect('produtos')
+    return redirect('produtos')
+
+
+def sobre(request):
     username = None
     if request.user.is_authenticated:
         username = request.user.username
-    return render(request, 'home/produtos.html', {'username': username})
+        
+    return render(request, 'home/sobre.html', {'username': username})
+
+
+def contato(request):
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.username
+        
+    return render(request, 'home/contato.html', {'username': username})
 
 
 @login_required(login_url="/auth/login/")

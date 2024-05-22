@@ -4,7 +4,7 @@
 <head>
     <meta charset="America/Sao_Paulo">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos</title>
+    <title>NaDespensa</title>
     <link rel="stylesheet" href="{% static 'css/produtos.css' %}">
 
 </head>
@@ -14,8 +14,8 @@
         <nav class="opcao_nav">
             <ul id="opcao_ul">
                 <li><a href="{% url 'produtos' %}"><strong>Produtos</strong></a></li>
-                <li><a href="#"><strong>Sobre</strong></a></li>
-                <li><a href="#"><strong>Contato</strong></a></li>
+                <li><a href="{% url 'sobre' %}"><strong>Sobre</strong></a></li>
+                <li><a href="{% url 'contato' %}"><strong>Contato</strong></a></li>
                 {% if request.user.is_authenticated %}
                 <li><a href="#" id="user-menu-toggle"><strong>Olá, {{ username }}</strong></a></li>
                 {% else %}
@@ -59,16 +59,39 @@
             window.location.href = "{% url 'logout' %}";
         }
     </script>
-    <section class="hero">
-        <h2>PRODUTOS</h2>
-        <label for="Produto">Produto:</label><input type="text" id="Produto" name="Produto"><br><br>
-        
-        <label for="quantidade">Quantidade:</label><input type="number" id="quantidade" name="quantidade"><br><br>
 
-        <label for="validade">Data de Validade:</label><input type="date" id="validade" name="validade"><br><br>
-        
-        
-        <a href="#" class="btn-center">Submit</a>
+    <section class="hero">
+        <h2 class="cad-prod">PRODUTOS</h2>
+        <form method="POST" action="{% url 'produtos' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-center">Submit</button>
+        </form>
+
+        <h2>Seus Produtos</h2>
+        <ul class="produto-lista">
+            {% for produto in produtos %}
+            <li>
+                <div class="produto-item">
+                    <span class="produto-nome">Produto: {{ produto.nome }}</span>
+                    <span class="produto-quantidade">Quantidade: {{ produto.quantidade }}</span>
+                    <span class="produto-validade">Validade: {{ produto.validade }}</span>
+                    <form action="{% url 'excluir_produto' produto.id %}" method="post">
+                        {% csrf_token %}
+                        <a href="{% url 'aumentar_quantidade' produto.id %}" class="btn-acoes-up">Aumentar</a>
+                        <button type="submit" class="btn-acoes confirm-delete-btn" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</button>
+                    </form>
+                    {% if produto.quantidade > 1 %}
+                        <form action="{% url 'diminuir_quantidade' produto.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-acoes confirm-delete-btn">Diminuir</button>
+                        </form>
+                        {% endif %}
+                    
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
     </section>
     <footer id="rodape">
         <p>&copy; 2024 NaDespensa. Todos os direitos reservados.</p>
