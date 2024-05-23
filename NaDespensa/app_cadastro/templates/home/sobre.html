@@ -23,14 +23,16 @@
                     <li><a href="{% url 'register' %}"><strong>Register</strong></a></li>
                 {% endif %}
             </ul>
+            <div id="user-menu">
+                <ul id="click-logout">
+                    <li><a href="{% url 'change_password' %}" class="btn-user">Alterar Senha</a></li>
+                    <li><a href="/auth/logout" class="btn-user">Logout</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
     
-    <div id="user-menu">
-        <ul id="click-logout">
-            <li><a href="/auth/logout" id="btn-logout">Logout</a></li>
-        </ul>
-    </div>
+    
     
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -45,7 +47,7 @@
                 }
             });
     
-            {% comment %} // Close the menu when clicking outside of it
+            {% comment %} 
             document.addEventListener("click", function(event) {
                 if (!userMenu.contains(event.target) && event.target !== userMenuToggle) {
                     userMenu.style.display = "none";
@@ -54,16 +56,24 @@
         });
     
         function logout() {
-            // Implement logout logic here
-            // For now, redirect to logout URL
             window.location.href = "{% url 'logout' %}";
         }
     </script>
-    <section class="hero">
-        <h2>Sobre o NaDespensa!</h2>
-        <p id="texto_menu">{% lorem 1 %}</p>
-        <a href="#" class="btn-center">Comece agora</a>
-    </section>
+
+    <main>
+        <section class="hero">
+            <h2>Sobre o NaDespensa!</h2>
+            <p id="texto_menu">{% lorem 10 %}</p>
+            <p id="texto_menu">{% lorem 9 %}</p>
+            <p id="texto_menu">{% lorem 8 %}</p>
+            <p id="texto_menu">{% lorem 7 %}</p>
+            <p id="texto_menu">{% lorem 6 %}</p>
+            <p id="texto_menu">{% lorem 4 %}</p>
+            <p id="texto_menu">{% lorem 5 %}</p>
+            <a href="#" class="btn-center">Comece agora</a>
+        </section>
+    </main>
+
     <footer id="rodape">
         <p>&copy; 2024 NaDespensa. Todos os direitos reservados.</p>
     </footer>

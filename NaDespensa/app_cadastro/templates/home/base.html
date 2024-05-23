@@ -4,9 +4,8 @@
 <head>
     <meta charset="America/Sao_Paulo">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NaDespensa</title>
-    <link rel="stylesheet" href="{% static 'css/produtos.css' %}">
-
+    <title>Contato</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
     <header>
@@ -28,12 +27,14 @@
                     <li><a href="{% url 'change_password' %}" class="btn-user">Alterar Senha</a></li>
                     <li><a href="/auth/logout" class="btn-user">Logout</a></li>
                 </ul>
-            </div>
         </nav>
     </header>
     
-    
-    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var userMenuToggle = document.getElementById("user-menu-toggle");
@@ -47,7 +48,7 @@
                 }
             });
     
-            {% comment %}
+            {% comment %} 
             document.addEventListener("click", function(event) {
                 if (!userMenu.contains(event.target) && event.target !== userMenuToggle) {
                     userMenu.style.display = "none";
@@ -59,47 +60,12 @@
             window.location.href = "{% url 'logout' %}";
         }
     </script>
-
-    <main>
-        <section class="hero">
-            <h2>PRODUTOS</h2>
-            <form class="cad-prod" method="POST" action="{% url 'produtos' %}">
-                <div class="label-prod">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                </div>
-                <button type="submit" class="btn-center">Submit</button>
-            </form>
-            
-            <h2>Seus Produtos</h2>
-            <ul class="produto-lista">
-                {% for produto in produtos %}
-                <li>
-                    <div class="produto-item">
-                        <span class="produto-nome">Produto: {{ produto.nome }}</span>
-                        <span class="produto-quantidade">Quantidade: {{ produto.quantidade }}</span>
-                        <span class="produto-validade">Validade: {{ produto.validade }}</span>
-                        <form action="{% url 'excluir_produto' produto.id %}" method="post">
-                            {% csrf_token %}
-                            <a href="{% url 'aumentar_quantidade' produto.id %}" class="btn-acoes-up">Aumentar</a>
-                            <button type="submit" class="btn-acoes confirm-delete-btn" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</button>
-                        </form>
-                        {% if produto.quantidade > 1 %}
-                            <form action="{% url 'diminuir_quantidade' produto.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn-acoes-down">Diminuir</button>
-                            </form>
-                            {% endif %}
-                            
-                        
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </section>
-    </main>
-    <footer id="rodape">
-        <p>&copy; 2024 NaDespensa. Todos os direitos reservados.</p>
+    
+    
+    <footer>
+        <footer id="rodape">
+            <p>&copy; 2024 NaDespensa. Todos os direitos reservados.</p>
+        </footer>
     </footer>
 </body>
 </html>

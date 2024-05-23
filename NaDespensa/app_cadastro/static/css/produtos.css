@@ -1,6 +1,54 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Adicionado z-index para garantir que a navbar fique acima de outros elementos */
+}
+
+main {
+    flex: 1;
+    margin-top: 70px; /* Ajuste conforme a altura da sua navbar */
+}
+
+.cad-prod{
+    text-align: center;
+}
+#id_nome{
+    margin: 5px auto;
+    display: block;
+    width: 200px;
+}
+#id_quantidade{
+    margin: 5px auto;
+    display: block;
+    width: 200px;
+}
+#id_validade{
+    margin: 5px auto;
+    display: block;
+    width: 200px;
+}
+
 nav ul {
     list-style-type: none;
-    margin: 0;
+    margin: 10px 0px 10px 10px;
     padding: 0;
     display: flex;
     gap: 20px;
@@ -15,82 +63,92 @@ nav ul li a {
     margin-right: 20px;
     color: #7de5b0;
 }
-body{
+
+body {
     font-family: Arial, sans-serif; 
     background-color: #f4f4f4; 
     color: #333; 
     margin: 0; 
     padding: 0;
 }
-header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
+
+h1 {
+    color: #7de5b0;
+    font-size: 36px;
 }
-h1{
-    color: #7de5b0; font-size: 36px;
-}
-#title{
+
+#title {
     margin-left: 15%;
     text-decoration: none; 
     color: inherit;
 }
-#nav_options{
+
+#nav_options {
     display: inline; 
     margin-right: 20px;
 }
-#opcao_ul{
-display: inline; margin-right: 20px;
+
+#opcao_ul {
+    display: inline;
+    margin-right: 20px;
 }
-#click-logout{
+
+#click-logout {
     list-style-type: none; 
     padding: 0;
     background-color: #ffffff;
 }
-#btn-logout{
+
+.btn-user {
     text-decoration: none;
     color: black;
 }
-#user-menu{
+
+#user-menu {
     display: none; 
-    position: absolute; 
-    top: 50px; 
+    position: absolute;
+    top: 55px; 
     right: 20px; 
     background-color: #fff; 
     border: 1px solid #ccc; 
     border-radius: 5px; 
     padding: 5px;
     border-color: #7de5b0;
-    margin: 1% 2% 3% 0px;
+    margin: 1% 1.25% 3% 0px;
 }
-section{
+
+section {
     text-align: center; 
     padding: 50px 0;
 }
-.cad-prod{
-    margin-top: 100px;
-}
-h2{
-    font-size: 28px; 
+
+h2 {
+    font-size: 28px;
     margin-bottom: 20px;
 }
-#texto_menu{
+
+#texto_menu {
     font-size: 18px; 
     margin-bottom: 30px;
 }
-.btn-center{
-    display: inline-block;background-color: #7de5b0; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;
+
+.btn-center {
+    display: inline-block;
+    background-color: #7de5b0;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin: 0 5px;
+}
+
+.btn-center:hover {
+    background-color: #61c190;
 }
 
 .produto-lista {
-    display: table;
+    display: ruby;
     list-style-type: none;
     padding: 0;
     margin: 20px 0;
@@ -98,13 +156,13 @@ h2{
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .produto-lista li {
-    padding: 10px;
+    padding: 08px;
     border-bottom: 1px solid #eeeeee;
     display: flex;
     justify-content: space-between;
@@ -137,31 +195,56 @@ h2{
     gap: 10px;
     margin-top: 10px;
 }
-.btn-acoes-up{
-    background-color: #00ff37;
-    display: block;
-    margin: 0;
-    width: 40;
+
+.btn-acoes-up {
+    background-color: #5ef57f;
+    display: inline-flex;
+    margin: 0 25px 0 0px;
+    width: 80px;
     margin-bottom: 5px;
     text-align: center;
     color: white;
-    padding: 5px 10px;
+    padding: 3px 05px 3px 10px;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
+
+.btn-acoes-down {
+    background-color: #ddca76;
+    position: absolute;
+    display: inline-flex;
+    margin: -62px 0 0px 130px;
+    width: 80px;
+    margin-bottom: 5px;
+    text-align: center;
+    color: white;
+    padding: 3px 05px 03px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
 .btn-acoes {
     display: block;
     margin: 0;
     width: 100%;
     margin-bottom: 5px;
     text-align: center;
-    background-color: #ff1100;
+    background-color: #f7827a;
     color: white;
     padding: 5px 10px;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+}
+
+.btn-acoes-up:hover {
+    background-color: #00ff37;
+}
+
+.btn-acoes-down:hover {
+    background-color: #f39e4f;
 }
 
 .btn-acoes:hover {
@@ -182,27 +265,11 @@ h2{
     cursor: pointer;
 }
 
-.btn-center {
-    display: inline-block;
-    background-color: #7de5b0;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin: 0 5px;
-}
-
-.btn-center:hover {
-    background-color: #61c190;
-}
-
-#rodape{
+#rodape {
     text-align: center;
     padding: 20px 0;
     background-color: #000000;
     color: #fff;
-    bottom: 0;
-    left: 0;
     width: 100%;
+    position: relative;
 }

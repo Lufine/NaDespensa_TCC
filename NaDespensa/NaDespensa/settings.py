@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_cadastro'
+    'app_cadastro',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +124,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'app_cadastro', 'static'),
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Use o servidor SMTP do seu provedor de e-mail
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nadespensa2@gmail.com'  # Seu email
+EMAIL_HOST_PASSWORD = 'nadespensa2024'  # Sua senha do email
+DEFAULT_FROM_EMAIL = 'nadespensa2@gmail.com'
